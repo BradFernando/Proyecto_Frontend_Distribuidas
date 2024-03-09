@@ -1,0 +1,48 @@
+<h1 mat-dialog-title>{{inputdata.title}}</h1>
+<div mat-dialog-content>
+    <mat-list>
+      <mat-list-item><strong>Cantidad solicitada: </strong><span>{{inputdata.cantidad_solicitada}}</span></mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item><strong>Observaciones: </strong><span>{{inputdata.observaciones}}</span></mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item><strong>Estado: </strong>
+        <span *ngIf="inputdata.estado === 'pendiente'" class="estado pendiente">
+           Pendiente
+        </span>
+        <span *ngIf="inputdata.estado === 'abastecido'" class="estado abastecido">
+           Abastecido
+        </span>
+        <span *ngIf="inputdata.estado === 'entregado'" class="estado entregado">
+           Entregado
+        </span>
+      </mat-list-item>
+    </mat-list>
+    <div class="example-container mat-elevation-z8">
+        <mat-table #table [dataSource]="dataSource">
+          <!-- Position Column -->
+          <ng-container matColumnDef="id_lote">
+            <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.id_lote}} </mat-cell>
+          </ng-container>
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="nombre">
+            <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.nombre}} </mat-cell>
+          </ng-container>
+      
+          <!-- Weight Column -->
+          <ng-container matColumnDef="cantidadPaquetesDisponibles">
+            <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.cantidadPaquetesDisponibles}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+
+    <div mat-dialog-actions>
+        <a (click)="closepopup()" mat-raised-button color="warn">Close</a>
+    </div>
+</div>

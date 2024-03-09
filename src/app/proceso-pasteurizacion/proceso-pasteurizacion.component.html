@@ -1,0 +1,97 @@
+<mat-card>
+
+    <mat-card-header>
+        <mat-form-field>
+            <input matInput (keyup)="Filterchange($event)" placeholder="Búsqueda Inteligente" />
+        </mat-form-field>
+        <div style="display: flex; align-items: center; margin-left: auto;">
+            <button (click)="addProcesoPasteurizacion()" mat-raised-button color="primary">Agregar Proceso (+)</button>
+        </div>
+    </mat-card-header>
+
+    <mat-card-content>
+
+        <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!-- Código Proceso Column -->
+            <ng-container matColumnDef="codProcesoPastz">
+                <th mat-header-cell *matHeaderCellDef> Código Proceso </th>
+                <td mat-cell *matCellDef="let element"> {{element.codProcesoPastz}} </td>
+            </ng-container>
+
+            <!-- Cantidad Litros Usados Column -->
+            <ng-container matColumnDef="cantidadLitrosUsados">
+                <th mat-header-cell *matHeaderCellDef> Cantidad Litros Usados </th>
+                <td mat-cell *matCellDef="let element"> {{element.cantidadLitrosUsados}} </td>
+            </ng-container>
+
+            <!-- Temperatura Column -->
+            <ng-container matColumnDef="temperatura">
+                <th mat-header-cell *matHeaderCellDef> Temperatura </th>
+                <td mat-cell *matCellDef="let element"> {{element.temperatura}} </td>
+            </ng-container>
+
+            <!-- Tiempo Tratamiento Column -->
+            <ng-container matColumnDef="tiempoTratamiento">
+                <th mat-header-cell *matHeaderCellDef> Tiempo Tratamiento </th>
+                <td mat-cell *matCellDef="let element"> {{element.tiempoTratamiento}} </td>
+            </ng-container>
+
+            <!-- Tipo Procesamiento Column -->
+            <ng-container matColumnDef="tipoProcesamiento">
+                <th mat-header-cell *matHeaderCellDef> Tipo Procesamiento </th>
+                <td mat-cell *matCellDef="let element"> {{element.tipoProcesamiento}} </td>
+            </ng-container>
+
+            <!-- Detalles Proceso Column -->
+            <ng-container matColumnDef="detallesProceso">
+                <th mat-header-cell *matHeaderCellDef> Detalles Proceso </th>
+                <td mat-cell *matCellDef="let element"> {{element.detallesProceso}} </td>
+            </ng-container>
+
+            <!-- Recepcion Leche Column
+            <ng-container matColumnDef="recepcionLeche">
+                <th mat-header-cell *matHeaderCellDef> Recepcion Leche </th>
+                <td mat-cell *matCellDef="let element">
+                  
+                    <span *ngFor="let recepcion of element.recepcionLeche">
+                        {{recepcion}}
+                    </span>
+                </td>
+            </ng-container> -->
+
+            <ng-container matColumnDef="recepcionLeche">
+                <th mat-header-cell *matHeaderCellDef> Recepción de Leche </th>
+                <td mat-cell *matCellDef="let element">
+                    <!-- Muestra cantidadLecheRecibida para cada elemento en recepcionLeche, separados por "-" -->
+                    <span *ngFor="let recepcion of element.recepcionLeche; let isLast=last">
+                        {{recepcion.codRecepcion}}{{isLast ? '' : ' - '}}
+                    </span>
+                </td>
+            </ng-container>
+
+            <!-- Acciones Column -->
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-raised-button color="warn" (click)="delete(element.codProcesoPastz)">Eliminar</button>
+                    <button mat-raised-button color="primary" (click)="edit(element)">Actualizar</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+    </mat-card-content>
+
+    <br>
+    <mat-card-footer>
+
+        <mat-paginator [pageSizeOptions]="[4, 10, 20]" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+        </mat-paginator>
+
+    </mat-card-footer>
+
+</mat-card>

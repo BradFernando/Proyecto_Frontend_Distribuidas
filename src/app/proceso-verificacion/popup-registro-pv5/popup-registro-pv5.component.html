@@ -1,0 +1,87 @@
+<form class="form" [formGroup]="form_procesoVerificacion" (ngSubmit)="save($event)">
+    <h1 mat-dialog-title>{{inputdata.title}}</h1>
+    <div mat-dialog-content>
+
+        <!-- Código Proceso Column -->
+        <mat-form-field class="example-form-field">
+            <mat-label>Código Proceso</mat-label>
+            <input matInput type="text" formControlName="codProcesoVerificacion" readonly>
+        </mat-form-field>
+
+        <!-- Resultado Verificación Column -->
+        <mat-form-field class="example-form-field">
+            <mat-label>Resultado Verificación</mat-label>
+            <mat-select formControlName="resultadoVerificacion" required>
+              <mat-option [value]="true">Correcto</mat-option>
+              <mat-option [value]="false">Incorrecto</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form_procesoVerificacion.get('resultadoVerificacion')?.hasError('required')">
+              Este campo es requerido.
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field class="example-form-field">
+            <mat-label>Tiempo Tratamiento</mat-label>
+            <input matInput type="time" placeholder="Tiempo Tratamiento" formControlName="tiempoTratamiento" required>
+            <mat-error *ngIf="form_procesoVerificacion.get('tiempoTratamiento')?.hasError('required')">
+              Este campo es requerido.
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field class="example-form-field">
+            <mat-label>Observaciones</mat-label>
+            <input matInput placeholder="Observaciones" formControlName="observaciones" required>
+            <mat-error *ngIf="form_procesoVerificacion.get('observaciones')?.hasError('required')">
+              Este campo es requerido.
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field class="example-form-field">
+            <mat-label>Detalles Proceso</mat-label>
+            <mat-select placeholder="Detalles Proceso" formControlName="detallesProceso" required>
+              <mat-option value="bueno">Bueno</mat-option>
+              <mat-option value="regular">Regular</mat-option>
+              <mat-option value="deficiente">Deficiente</mat-option>
+              <mat-option value="óptimo">Óptimo</mat-option>
+              <mat-option value="mejorable">Mejorable</mat-option>
+              <mat-option value="n/a">No aplica</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form_procesoVerificacion.get('detallesProceso')?.hasError('required')">
+              Este campo es requerido.
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field class="example-form-field">
+            <mat-label>Proceso Pasteurización</mat-label>
+            <input matInput [formControl]="searchControl" placeholder="Buscar...">
+            <mat-select formControlName="procesoPasteurizacion" required>
+              <mat-option *ngFor="let proceso of filteredprocesosPasteurizacion| async" [value]="proceso">
+                {{proceso}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form_procesoVerificacion.get('procesoPasteurizacion')?.hasError('required')">
+              Este campo es requerido.
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field class="example-form-field">
+            <mat-label>Lote Productos</mat-label>
+            <input matInput [formControl]="searchControl" placeholder="Buscar...">
+            <mat-select formControlName="loteProductos" multiple required>
+              <mat-option *ngFor="let lote of filteredLotes | async" [value]="lote">
+                {{lote}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form_procesoVerificacion.get('loteProductos')?.hasError('required')">
+              Este campo es requerido.
+            </mat-error>
+          </mat-form-field>
+
+          
+    </div>
+
+    <div mat-dialog-actions>
+        <button mat-raised-button type="submit" (click)="submitForm()" color="primary">Enviar</button>
+        <a (click)="closepopup()" mat-raised-button color="warn">Close</a>
+    </div>
+</form>

@@ -1,0 +1,121 @@
+<form class="form-class-login" [formGroup]="form" (ngSubmit)="signUp ? register($event) : save($event)">
+  <div class="cont" [class.s--signup]="signUp">
+    <div class="form sign-in">
+      <h2>Bienvenido al sistema de la Pasterizadora Huesos Yesos</h2>
+      <mat-form-field>
+        <mat-label>User</mat-label>
+        <input matInput type="text" class="input-field" [errorStateMatcher]="matcher"
+               placeholder="Ingrese su usuario" formControlName="username"/>
+        <mat-error *ngIf="form.get('username')?.touched && form.get('username')?.hasError('required')">
+          Usuario Requerido!
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" class="input-field" [errorStateMatcher]="matcher"
+               placeholder="Ingrese su contraseña" formControlName="password"/>
+        <mat-error *ngIf="form.get('password')?.touched && form.get('password')?.hasError('required')">
+          Contraseña Requerida!
+        </mat-error>
+      </mat-form-field>
+      <p class="forgot-pass">Forgot password?</p>
+      <button type="button" mat-raised-button color="primary" (click)="save($event)">Sign In</button>
+      <button mat-raised-button color="warn" type="button">Connect with <span>facebook</span></button>
+    </div>
+    <div class="sub-cont">
+      <div class="img">
+        <div class="img__text m--up">
+          <h2>Atención Nuevos Usuarios</h2>
+          <p>Si es nuevo vaya al siguiente enlace para poder registrarse en el sistema!</p>
+        </div>
+        <div class="img__text m--in">
+          <h2>¿Ya eres uno de nosotros?</h2>
+          <p>Si ya tienes una cuenta, simplemente inicia sesión. ¡Te extrañamos!</p>
+        </div>
+        <div class="img__btn" (click)="toggleSignUp()">
+          <span class="m--up">Registro</span>
+          <span class="m--in">Entrar</span>
+        </div>
+      </div>
+      <div class="form sign-up">
+        <h2>Registro en el sistema</h2>
+        <mat-form-field appearance="fill">
+          <mat-label>Código de Empleado</mat-label>
+          <input matInput type="text"  class="input-field" [errorStateMatcher]="matcher"
+                 placeholder="Ingrese su Código" formControlName="codEmpleado"/>
+          <mat-icon matSuffix>code</mat-icon>
+          <mat-error *ngIf="form.get('codEmpleado')?.touched && form.get('codEmpleado')?.hasError('required')">
+            Código Requerido!
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Nombres</mat-label>
+          <input matInput type="text" class="input-field" [errorStateMatcher]="matcher"
+                 placeholder="Ingrese sus Nombres" formControlName="nombres"/>
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error *ngIf="form.get('nombres')?.touched && form.get('nombres')?.hasError('required')">
+            Nombres Requeridos!
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Apellidos</mat-label>
+          <input matInput type="text" class="input-field" [errorStateMatcher]="matcher"
+                 placeholder="Ingrese sus Apellidos" formControlName="apellidos"/>
+          <mat-icon matSuffix>person_outline</mat-icon>
+          <mat-error *ngIf="form.get('apellidos')?.touched && form.get('apellidos')?.hasError('required')">
+            Apellidos Requeridos!
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Cédula</mat-label>
+          <input matInput type="text" class="input-field" [errorStateMatcher]="matcher"
+                 placeholder="Ingrese su Cédula" formControlName="cedula"/>
+          <mat-icon matSuffix>card_membership</mat-icon>
+          <mat-error *ngIf="form.get('cedula')?.touched && form.get('cedula')?.hasError('required')">
+            Cédula Requerida!
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Teléfono</mat-label>
+          <span matPrefix>+593 &nbsp;</span>
+          <input matInput type="tel" class="input-field" [errorStateMatcher]="matcher"
+                 placeholder="555-555-555" formControlName="contacto"/>
+          <mat-error *ngIf="form.get('contacto')?.touched && form.get('contacto')?.hasError('required')">
+            Teléfono Requerido!
+          </mat-error>
+          <mat-icon matSuffix>phone</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Correo</mat-label>
+          <input matInput type="email" class="input-field" [errorStateMatcher]="matcher"
+                 placeholder="Ingrese su Correo" formControlName="email"/>
+          <mat-error *ngIf="form.get('email')?.touched && form.get('email')?.hasError('required')">
+            Correo Requerido!
+          </mat-error>
+          <mat-error *ngIf="form.get('email')?.touched && form.get('email')?.hasError('email')">
+            Correo Inválido!
+          </mat-error>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <mat-form-field appearance="fill">
+          <mat-label>Usuario</mat-label>
+          <input matInput type="text" class="input-field" [errorStateMatcher]="matcher"
+                 placeholder="Necesita un Usuario" formControlName="username"/>
+          <mat-error *ngIf="form.get('username')?.touched && form.get('username')?.hasError('required')">
+            Usuario Requerido!
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" class="input-field" [errorStateMatcher]="matcher"
+                 placeholder="Proporcione una Clave" formControlName="password"/>
+          <mat-error *ngIf="form.get('password')?.touched && form.get('password')?.hasError('required')">
+            Contraseña Requerida!
+          </mat-error>
+        </mat-form-field>
+        <button type="button" mat-raised-button color="primary" (click)="register($event)">Sign Up</button>
+        <button mat-raised-button color="warn" type="button">Join with <span>facebook</span></button>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,88 @@
+<mat-card>
+
+    <mat-card-header>
+        <mat-form-field>
+            <input matInput (keyup)="Filterchange($event)" placeholder="Búsqueda Inteligente" />
+        </mat-form-field>
+        <div style="display: flex; align-items: center; margin-left: auto;">
+            <button (click)="addLote()" mat-raised-button color="primary">Agregar Lote (+)</button>
+        </div>
+    </mat-card-header>
+
+    <mat-card-content>
+
+        <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!-- Código Lote Column -->
+            <ng-container matColumnDef="codLote">
+                <th mat-header-cell *matHeaderCellDef> Código Lote </th>
+                <td mat-cell *matCellDef="let element"> {{element.codLote}} </td>
+            </ng-container>
+
+            <!-- Nombre Lote Column -->
+            <ng-container matColumnDef="nombreLote">
+                <th mat-header-cell *matHeaderCellDef> Nombre Lote </th>
+                <td mat-cell *matCellDef="let element"> {{element.nombreLote}} </td>
+            </ng-container>
+
+            <!-- Tipo Lote Column -->
+            <ng-container matColumnDef="tipoLote">
+                <th mat-header-cell *matHeaderCellDef> Tipo Lote </th>
+                <td mat-cell *matCellDef="let element"> {{element.tipoLote}} </td>
+            </ng-container>
+
+            <!-- Fecha de Producción Column -->
+            <ng-container matColumnDef="fechadeProduccion">
+                <th mat-header-cell *matHeaderCellDef> Fecha de Producción </th>
+                <td mat-cell *matCellDef="let element"> {{element.fechadeProduccion}} </td>
+            </ng-container>
+
+            <!-- Fecha de Vencimiento Column -->
+            <ng-container matColumnDef="fechadeVencimiento">
+                <th mat-header-cell *matHeaderCellDef> Fecha de Vencimiento </th>
+                <td mat-cell *matCellDef="let element"> {{element.fechadeVencimiento}} </td>
+            </ng-container>
+
+            <!-- Detalles Lote Column -->
+            <ng-container matColumnDef="detallesLote">
+                <th mat-header-cell *matHeaderCellDef> Detalles Lote </th>
+                <td mat-cell *matCellDef="let element"> {{element.detallesLote}} </td>
+            </ng-container>
+
+            <!-- Cantidad Paquetes Column -->
+            <ng-container matColumnDef="cantidadPaquetesTotales">
+                <th mat-header-cell *matHeaderCellDef> Cantidad Paquetes Total </th>
+                <td mat-cell *matCellDef="let element"> {{element.cantidadPaquetesTotales}} </td>
+            </ng-container>
+
+             <!-- Cantidad Paquetes Column -->
+             <ng-container matColumnDef="cantidadPaquetesDisponibles">
+                <th mat-header-cell *matHeaderCellDef> Cantidad Paquetes Disponibles </th>
+                <td mat-cell *matCellDef="let element"> {{element.cantidadPaquetesDisponibles}} </td>
+            </ng-container>
+
+            <!-- Acciones Column -->
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-raised-button color="warn" (click)="delete(element.codLote)">Eliminar</button>
+                    <button mat-raised-button color="primary" (click)="edit(element)">Actualizar</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+    </mat-card-content>
+
+    <br>
+    <mat-card-footer>
+
+        <mat-paginator [pageSizeOptions]="[4, 10, 20]" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+        </mat-paginator>
+
+    </mat-card-footer>
+
+</mat-card>

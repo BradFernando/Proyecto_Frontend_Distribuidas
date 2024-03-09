@@ -1,0 +1,110 @@
+
+<form class="form" [formGroup]="form_HaciendaLechera" (ngSubmit)="save($event)">
+    <h1 mat-dialog-title>{{inputdata.title}}</h1>
+    <div mat-dialog-content>
+
+         <!-- Codigo Lechero Independiente -->
+   <mat-form-field class="example-form-field">
+    <mat-label>Código Hacienda Lechera</mat-label>
+    <input matInput type="text" formControlName="codHacienda" readonly>
+  </mat-form-field>
+        
+  <mat-form-field class="example-form-field">
+    <mat-label>Nombre de la Hacienda</mat-label>
+    <input matInput placeholder="Nombre de la Hacienda" formControlName="nombreHacienda" required>
+    <mat-error *ngIf="form_HaciendaLechera?.get('nombreHacienda')?.hasError('required')">
+      Este campo es requerido.
+    </mat-error>
+  </mat-form-field>
+  
+  <mat-form-field class="example-form-field">
+    <mat-label> RUC </mat-label>
+    <input matInput type="text" placeholder="RUC" formControlName="ruc" required>
+    <mat-error *ngIf="form_HaciendaLechera?.get('ruc')?.hasError('required')">
+      Este campo es requerido.
+    </mat-error>
+    <mat-error *ngIf="form_HaciendaLechera?.get('ruc')?.hasError('pattern')">
+      Debes ingresar 13 dígitos.
+    </mat-error>
+  </mat-form-field>
+  
+  <mat-form-field class="example-form-field">
+    <mat-label> Dirección </mat-label>
+    <input matInput placeholder="Dirección" formControlName="direccion" required>
+    <mat-error *ngIf="form_HaciendaLechera?.get('direccion')?.hasError('required')">
+      Este campo es requerido.
+    </mat-error>
+  </mat-form-field>
+  
+  <mat-form-field class="example-form-field">
+    <mat-label> Teléfono Empresa </mat-label>
+    <input matInput type="text" placeholder="Teléfono Empresa" formControlName="telefonoEmpresa" required>
+    <mat-icon matSuffix>phone</mat-icon>
+    <mat-error *ngIf="form_HaciendaLechera?.get('telefonoEmpresa')?.hasError('required')">
+      Este campo es requerido.
+    </mat-error>
+    <mat-error *ngIf="form_HaciendaLechera?.get('telefonoEmpresa')?.hasError('pattern')">
+      Debes ingresar 10 dígitos.
+    </mat-error>
+  </mat-form-field>
+  
+  <mat-form-field class="example-form-field">
+    <mat-label> Email </mat-label>
+    <input matInput placeholder="Email" formControlName="email" required>
+    <mat-error *ngIf="form_HaciendaLechera?.get('email')?.hasError('required')">
+      Este campo es requerido.
+    </mat-error>
+    <mat-error *ngIf="form_HaciendaLechera?.get('email')?.hasError('email')">
+      Debes ingresar un email válido.
+    </mat-error>
+  </mat-form-field>
+  
+  <mat-form-field class="example-form-field">
+    <mat-label> Nombre del Propietario </mat-label>
+    <input matInput placeholder="Responsable" formControlName="responsable" required>
+    <mat-error *ngIf="form_HaciendaLechera?.get('responsable')?.hasError('required')">
+      Este campo es requerido.
+    </mat-error>
+  </mat-form-field>
+  
+  <mat-form-field class="example-form-field">
+    <mat-label> Contacto </mat-label>
+    <input matInput type="text" placeholder="Contacto" formControlName="telefonoContacto" required>
+    <mat-icon matSuffix>phone</mat-icon>
+    <mat-error *ngIf="form_HaciendaLechera?.get('telefonoContacto')?.hasError('required')">
+      Este campo es requerido.
+    </mat-error>
+    <mat-error *ngIf="form_HaciendaLechera?.get('telefonoContacto')?.hasError('pattern')">
+      Debes ingresar 10 dígitos.
+    </mat-error>
+  </mat-form-field>
+  
+  <mat-form-field class="example-form-field">
+    <mat-label> Fecha de Adquisición </mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="fechaCompra" required>
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="form_HaciendaLechera?.get('fechaCompra')?.hasError('required')">
+      Este campo es requerido.
+    </mat-error>
+  </mat-form-field>
+  
+  <mat-form-field>
+    <mat-label>Detalles Suministro</mat-label>
+    <mat-select formControlName="detallesSuministro" required>
+      <mat-option value="suministroCompleto">Suministro Completo</mat-option>
+      <mat-option value="suministroIncompleto">Suministro Incompleto</mat-option>
+    </mat-select>
+    <mat-error *ngIf="form_HaciendaLechera?.get('detallesSuministro')?.hasError('required')">
+      Este campo es requerido.
+    </mat-error>
+  </mat-form-field>
+    
+    </div>
+    
+    <div mat-dialog-actions>
+        <button mat-raised-button type="submit"  (click)="submitForm()" color="primary">Enviar</button>
+        <a (click)="closepopup()" mat-raised-button color="warn">Close</a>
+    </div>
+    </form>

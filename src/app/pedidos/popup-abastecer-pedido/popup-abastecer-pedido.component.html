@@ -1,0 +1,22 @@
+<form class="form" [formGroup]="form_abastecer" (ngSubmit)="save($event)">
+    <h1 mat-dialog-title>{{inputdata.title}}</h1>
+    <div mat-dialog-content>
+        <mat-form-field class="example-form-field">
+            <mat-label>Lote</mat-label>
+            <mat-select formControlName="codLote" name="codLote" >
+                <mat-option *ngFor="let lote of dataCombo" [value]="lote[0]" (click) = "cantidadPaquetesLote(lote[0])">
+                    {{lote[0]}} - {{lote[1]}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    
+        <mat-form-field class="example-form-field">
+            <mat-label>Cantidad - Maximo {{cantidad}}</mat-label>
+            <input matInput type="number" formControlName="cantidad_paquetes" max="{{cantidad}}" min="1">
+        </mat-form-field>
+    
+        <div mat-dialog-actions>
+            <button mat-raised-button type="submit" (click)="submitForm()" color="primary">Enviar</button>
+            <a (click)="closepopup()" mat-raised-button color="warn">Close</a>
+        </div>
+    </div>
+</form>

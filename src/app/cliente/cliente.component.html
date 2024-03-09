@@ -1,0 +1,71 @@
+<mat-card>
+
+    <mat-card-header>
+      <mat-form-field>
+        <input matInput (keyup)="Filterchange($event)" placeholder="Búsqueda Inteligente" />
+      </mat-form-field>
+      <button style="margin-left: 60%;" (click)="addCliente()" mat-raised-button color="primary">Agregar (+)</button>
+    </mat-card-header>
+  
+    <mat-card-content>
+  
+      <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+        <!-- Cedula Cliente Column -->
+        <ng-container matColumnDef="cedula_cliente">
+          <th mat-header-cell *matHeaderCellDef> Cédula Cliente </th>
+          <td mat-cell *matCellDef="let element"> {{element.cedula_cliente}} </td>
+        </ng-container>
+  
+        <!-- Nombres Column -->
+        <ng-container matColumnDef="nombres">
+          <th mat-header-cell *matHeaderCellDef> Nombres </th>
+          <td mat-cell *matCellDef="let element"> {{element.nombres}} </td>
+        </ng-container>
+  
+        <!-- Apellidos Column -->
+        <ng-container matColumnDef="apellidos">
+          <th mat-header-cell *matHeaderCellDef> Apellidos </th>
+          <td mat-cell *matCellDef="let element"> {{element.apellidos}} </td>
+        </ng-container>
+  
+        <!-- Celular Column -->
+        <ng-container matColumnDef="celular">
+          <th mat-header-cell *matHeaderCellDef> Celular </th>
+          <td mat-cell *matCellDef="let element"> {{element.celular}} </td>
+        </ng-container>
+  
+        <!-- Correo Column -->
+        <ng-container matColumnDef="correo">
+          <th mat-header-cell *matHeaderCellDef> Correo </th>
+          <td mat-cell *matCellDef="let element"> {{element.correo}} </td>
+        </ng-container>
+  
+        <!-- Dirección Column -->
+        <ng-container matColumnDef="direccion">
+          <th mat-header-cell *matHeaderCellDef> Dirección </th>
+          <td mat-cell *matCellDef="let element"> {{element.direccion}} </td>
+        </ng-container>
+  
+        <!-- Acciones Column -->
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-raised-button color="warn"(click)="delete(element._id)">Eliminar</button>
+            <button mat-raised-button color="primary" (click)="edit(element)">Actualizar</button>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+      </table>
+    </mat-card-content>
+  
+    <br>
+    <mat-card-footer>
+      <mat-paginator [pageSizeOptions]="[4, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+      </mat-paginator>
+    </mat-card-footer>
+  
+  </mat-card>

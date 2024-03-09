@@ -1,0 +1,59 @@
+
+/*.mat-elevation-z8 {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  mat-table {
+    width: 50%;
+  }
+
+  mat-cell {
+    padding: 10px;
+    text-align: left;
+  }*/
+  
+  /* este era para el color del header 
+  .header {
+    background-color: #0979db; 
+    color: #000000; 
+  }
+  
+ 
+.mat-mdc-header-cell[_ngcontent-ng-c3046549937] {
+    background: #0979db;
+}
+*/
+/* Estilos generales */
+.mat-elevation-z8 {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+mat-table {
+  width: 100%; /* Hacer que la tabla ocupe el 100% del contenedor */
+}
+
+mat-cell {
+  padding: 10px;
+  text-align: left;
+}
+
+/* Estilos de los botones en la columna "acciones" */
+.acciones-cell {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Opcional: Añade márgenes o estilos adicionales según tus preferencias */
+  .acciones-cell button {
+    margin-bottom: 5px; /* Agrega un margen entre los botones */
+  }
+  
+  /* Ajustes para la tarjeta (mat-card) */
+  mat-card {
+    width: 100%; /* Hacer que la tarjeta ocupe el 100% del contenedor */
+    overflow: auto; /* Puedes cambiarlo según tus necesidades, 'hidden' o 'scroll' */
+  }

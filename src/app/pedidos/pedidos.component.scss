@@ -1,0 +1,26 @@
+.acciones-cell {
+    display: flex;
+    justify-content: space-between;
+  }
+
+.pendiente{
+  background-color: rgb(255, 255, 169);
+  border-radius: 20px;
+  border: solid 1px rgb(155, 155, 2);
+}
+
+.abastecido{
+  background-color: rgb(199, 255, 169);
+  border-radius: 20px;
+  border: solid 1px rgb(94, 163, 57);
+}
+
+.entregado{
+  background-color: rgb(169, 236, 255);
+  border-radius: 20px;
+  border: solid 1px rgb(46, 134, 158);
+}
+
+.btn_entregar{
+  color: rgb(24, 156, 24);
+}

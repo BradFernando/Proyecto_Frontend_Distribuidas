@@ -1,0 +1,103 @@
+<mat-card>
+
+    <mat-card-header>
+        <mat-form-field>
+            <input matInput (keyup)="Filterchange($event)" placeholder="Búsqueda Inteligente" />
+        </mat-form-field>
+        <div style="display: flex; align-items: center; margin-left: auto;">
+            <button (click)="addRecepcionHacleche()" mat-raised-button color="primary">Agregar Hacienda (+)</button>
+            <button style="margin-left: 10px;" (click)="addRecepcionIndependienteleche()" mat-raised-button color="primary">Agregar Lechero (+)</button>
+        </div>
+    </mat-card-header>
+
+
+    <mat-card-content>
+
+        <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!-- Código Recepción Column -->
+            <ng-container matColumnDef="codRecepcion">
+                <th mat-header-cell *matHeaderCellDef> Código Recepción </th>
+                <td mat-cell *matCellDef="let element"> {{element.codRecepcion}} </td>
+            </ng-container>
+
+            <!-- Fecha Recepción Column -->
+            <ng-container matColumnDef="fechaRecepcion">
+                <th mat-header-cell *matHeaderCellDef> Fecha Recepción </th>
+                <td mat-cell *matCellDef="let element"> {{element.fechaRecepcion}} </td>
+            </ng-container>
+
+            <!-- Resultados Pruebas Calidad Column -->
+            <ng-container matColumnDef="resultadosPruebasCalidad">
+                <th mat-header-cell *matHeaderCellDef> Resultados Pruebas Calidad </th>
+                <td mat-cell *matCellDef="let element"> {{element.resultadosPruebasCalidad}} </td>
+            </ng-container>
+
+            <!-- Cantidad Leche Recibida Column -->
+            <ng-container matColumnDef="cantidadLecheRecibida">
+                <th mat-header-cell *matHeaderCellDef> Cantidad Leche Recibida </th>
+                <td mat-cell *matCellDef="let element"> {{element.cantidadLecheRecibida}} </td>
+            </ng-container>
+
+            <!-- Pago Total Column -->
+            <ng-container matColumnDef="pagoTotal">
+                <th mat-header-cell *matHeaderCellDef> Pago Total </th>
+                <td mat-cell *matCellDef="let element"> {{element.pagoTotal}} </td>
+            </ng-container>
+
+            <!-- Hacienda Lechera / Lechero Independiente Column -->
+            <!--
+<ng-container matColumnDef="haciendaLechera">
+    <th mat-header-cell *matHeaderCellDef> Hacienda Lechera / Lechero Independiente </th>
+    <td mat-cell *matCellDef="let element">
+        <span *ngIf="element.haciendaLechera && element.haciendaLechera[0] && element.haciendaLechera[0].nombreHacienda">
+            {{element.haciendaLechera[0].nombreHacienda}}
+        </span>
+        <span *ngIf="element.lecheroIndependiente && element.lecheroIndependiente[0] && element.lecheroIndependiente[0].cedula">
+            {{element.lecheroIndependiente[0].cedula}}
+        </span>
+    </td>
+</ng-container> -->
+
+<ng-container matColumnDef="haciendaLechera">
+    <th mat-header-cell *matHeaderCellDef> Hacienda Lechera / Lechero Independiente </th>
+    <td mat-cell *matCellDef="let element">
+        <!-- Muestra nombreHacienda si existe en haciendaLechera -->
+        <span *ngFor="let hacienda of element.haciendaLechera; let isLast=last">
+            {{hacienda.nombreHacienda}}{{isLast ? '' : ' - '}}
+        </span>
+        <!-- Muestra cedula si existe en lecheroIndependiente -->
+        <span *ngFor="let lechero of element.lecheroIndependiente; let isLast=last">
+            {{lechero.cedula}}{{isLast ? '' : ' - '}}
+        </span>
+    </td>
+</ng-container>
+
+            <!-- Acciones Column -->
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-raised-button color="warn" (click)="delete(element.codRecepcion)">Eliminar</button>
+                    <button mat-raised-button color="primary" (click)="edit(element)">Actualizar</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+        </table>
+    </mat-card-content>
+
+    <br>
+    <mat-card-footer>
+
+        <mat-paginator [pageSizeOptions]="[4, 10, 20]" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+        </mat-paginator>
+
+
+    </mat-card-footer>
+
+
+</mat-card>

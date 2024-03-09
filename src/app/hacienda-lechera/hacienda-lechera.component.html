@@ -1,0 +1,104 @@
+<mat-card>
+
+  <mat-card-header>
+    <mat-form-field>
+      <input matInput (keyup)="Filterchange($event)" placeholder="Búsqueda Inteligente" />
+    </mat-form-field>
+    <button style="margin-left: 60%;" (click)="addhaciendaleche()" mat-raised-button color="primary">Agregar (+)</button>
+
+  </mat-card-header>
+
+
+  <mat-card-content>
+
+    <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <!-- Codigo Hacienda -->
+          <ng-container matColumnDef="codHacienda">
+            <th mat-header-cell *matHeaderCellDef class="header"> Código Hacienda Lechera </th>
+            <td mat-cell *matCellDef="let element"> {{element.codHacienda}} </td>
+          </ng-container>
+
+      <!-- Nombre Hacienda Column -->
+    <ng-container matColumnDef="nombreHacienda">
+      <th mat-header-cell *matHeaderCellDef> Nombre Hacienda </th>
+      <td mat-cell *matCellDef="let element"> {{element.nombreHacienda}} </td>
+    </ng-container>
+
+    <!-- RUC Column -->
+    <ng-container matColumnDef="ruc">
+      <th mat-header-cell *matHeaderCellDef> RUC </th>
+      <td mat-cell *matCellDef="let element"> {{element.ruc}} </td>
+    </ng-container>
+
+    <!-- Dirección Column -->
+    <ng-container matColumnDef="direccion">
+      <th mat-header-cell *matHeaderCellDef> Dirección </th>
+      <td mat-cell *matCellDef="let element"> {{element.direccion}} </td>
+    </ng-container>
+
+    <!-- Teléfono Empresa Column -->
+    <ng-container matColumnDef="telefonoEmpresa">
+      <th mat-header-cell *matHeaderCellDef> Teléfono Empresa </th>
+      <td mat-cell *matCellDef="let element"> {{element.telefonoEmpresa}} </td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+    <!-- Responsable Column -->
+    <ng-container matColumnDef="responsable">
+      <th mat-header-cell *matHeaderCellDef> Responsable </th>
+      <td mat-cell *matCellDef="let element"> {{element.responsable}} </td>
+    </ng-container>
+
+    <!-- Contacto Column -->
+    <ng-container matColumnDef="telefonoContacto">
+      <th mat-header-cell *matHeaderCellDef> Contacto </th>
+      <td mat-cell *matCellDef="let element"> {{element.telefonoContacto}} </td>
+    </ng-container>
+
+    <!-- Fecha Compra Column -->
+    <ng-container matColumnDef="fechaCompra">
+      <th mat-header-cell *matHeaderCellDef> Fecha Compra </th>
+      <td mat-cell *matCellDef="let element"> {{element.fechaCompra}} </td>
+    </ng-container>
+
+    <!-- Detalles Suministro Column -->
+    <ng-container matColumnDef="detallesSuministro">
+      <th mat-header-cell *matHeaderCellDef> Detalles Suministro </th>
+      <td mat-cell *matCellDef="let element"> {{getSuministroDisplayValue(element.detallesSuministro)}} </td>
+    </ng-container>
+
+      
+     <!-- Acciones Column -->
+     <ng-container matColumnDef="acciones" class="header">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *matCellDef="let element" class="acciones-cell">
+        <button mat-raised-button color="warn"(click)="delete(element.codHacienda )">Eliminar</button>
+        <button mat-raised-button color="primary" (click)="edit(element)">Actualizar</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+    </table>
+  </mat-card-content>
+
+  <br>
+  <mat-card-footer>
+
+    <mat-paginator [pageSizeOptions]="[4, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+    </mat-paginator>
+
+
+  </mat-card-footer>
+
+
+</mat-card>
+

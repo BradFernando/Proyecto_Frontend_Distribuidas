@@ -1,0 +1,53 @@
+<div class="card-container">
+    <mat-card *ngFor="let card of cards; let i = index" [ngStyle]="{'background-color': colors[i % colors.length]}">
+        <mat-card-header>
+            <!--<mat-card-title>{{ card.title }}</mat-card-title> -->
+        </mat-card-header>
+        <div class="card-content">
+            <div class="text-content">
+                <h2 class="card-count">{{ card.count }}</h2>
+                <p class="card-subtitle">{{ card.subtitle }}</p>
+            </div>
+            <div class="icon-content">
+                <mat-icon *ngIf="card.subtitle === 'Haciendas Lecheras'">home</mat-icon>
+                <mat-icon *ngIf="card.subtitle === 'Lecheros Independientes'">person_pin</mat-icon>
+                <mat-icon *ngIf="card.subtitle === 'Recepcion de Leche'">emoji_nature</mat-icon>
+                <mat-icon *ngIf="card.subtitle === 'Proceso de Pasteurizacion'">settings</mat-icon>
+                <mat-icon *ngIf="card.subtitle === 'Lotes de Productos'">local_shipping</mat-icon>
+                <mat-icon *ngIf="card.subtitle === 'Proceso de Verificacion'">business</mat-icon>
+                <mat-icon *ngIf="card.subtitle === 'Clientes'">people</mat-icon>
+                <mat-icon *ngIf="card.subtitle === 'Pedidos'">shopping_cart</mat-icon>
+            </div>
+        </div>
+    </mat-card>
+</div>
+
+<hr> <!-- Separador de línea -->
+
+<mat-form-field appearance="fill">
+    <mat-label>Fecha de inicio</mat-label>
+    <input matInput [matDatepicker]="picker1" [(ngModel)]="fechaInicio">
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+    <mat-label>Fecha de fin</mat-label>
+    <input matInput [matDatepicker]="picker2" [(ngModel)]="fechaFin">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+</mat-form-field>
+
+<button mat-raised-button color="primary" (click)="loadData()">Cargar datos</button>
+
+
+<mat-card>
+    
+
+   
+    <mat-card-content>
+        <ngx-charts-bar-vertical [results]="chartData" [xAxis]="true" [yAxis]="true" [gradient]="false" [legend]="true"
+            [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Fecha'"
+            [yAxisLabel]="'Suma de leche recibida'"></ngx-charts-bar-vertical>
+    </mat-card-content>
+</mat-card>

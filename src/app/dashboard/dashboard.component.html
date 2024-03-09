@@ -1,0 +1,101 @@
+<mat-toolbar color="primary" class="mat-elevation-z8">
+    <button (click)="drawer.toggle()" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span><mat-icon>storefront</mat-icon>
+        Producción Leche Pasteurizada</span>
+    <span class="example-spacer"></span>
+    <!--
+    <button routerLink="" mat-button>Home</button>
+    <button [matMenuTriggerFor]="lvl1master" mat-button>Master I</button>
+    <mat-menu #lvl1master="matMenu">
+        <button [matMenuTriggerFor]="company" mat-menu-item>Company</button>
+        <button [matMenuTriggerFor]="customer" mat-menu-item>Customer</button>
+        <button [matMenuTriggerFor]="product" mat-menu-item>Product</button>
+    </mat-menu>
+
+    <mat-menu #company="matMenu">
+        <button mat-menu-item>Term</button>
+        <button mat-menu-item>Tax</button>
+        <button mat-menu-item>Currency</button>
+    </mat-menu>
+    <mat-menu #customer="matMenu">
+        <button mat-menu-item>Type</button>
+        <button mat-menu-item>Tax</button>
+    </mat-menu>
+    <mat-menu #product="matMenu">
+        <button mat-menu-item>Category</button>
+        <button [matMenuTriggerFor]="variant" mat-menu-item>Variant</button>
+        <button mat-menu-item>UOM</button>
+    </mat-menu>
+
+    <mat-menu #variant="matMenu">
+        <button mat-menu-item>Color</button>
+        <button mat-menu-item>Size</button>
+    </mat-menu>
+
+    <button routerLink="input" mat-button>Input</button>
+    <button routerLink="autocomplete" mat-button>Autocomplete</button>
+-->
+
+    <a href="#" mat-raised-button color="accent">Cerrar Sesión</a>
+    <!-- <button (click)="badgevisibility()"  mat-icon-button>
+        <mat-icon matBadgeColor="accent" matBadge="15" [matBadgeHidden]="badgevisible" matBadgeSize="small">notifications</mat-icon>
+    </button> -->
+</mat-toolbar>
+<mat-drawer-container autosize>
+    <mat-drawer #drawer opened="true" mode="side" position="start">
+        <mat-nav-list>
+            <mat-list-item>
+                <button routerLink="dashboard-card" mat-button><mat-icon>dashboard</mat-icon> Dashboard</button>
+            </mat-list-item>
+            <mat-list-item>
+                <button routerLink="hacienda-lechera" mat-button><mat-icon>home</mat-icon> Hacienda Lechera</button>
+            </mat-list-item>
+            <mat-list-item>
+                <button routerLink="lechero-independiente" mat-button><mat-icon>person_pin</mat-icon> Lechero
+                    Independiente</button>
+            </mat-list-item>
+
+            <mat-list-item>
+                <button routerLink="recepcion-leche" mat-button><mat-icon>emoji_nature</mat-icon> Recepción de
+                    Leche</button>
+            </mat-list-item>
+
+            <!--
+            <mat-list-item>
+                <button mat-button [matMenuTriggerFor]="submenu1">
+                    <mat-icon>emoji_nature</mat-icon> Recepción de Leche
+                </button>
+                <mat-menu #submenu1="matMenu">
+                    <button mat-menu-item routerLink="recepcion-leche">Hacienda</button>
+                    <button mat-menu-item routerLink="recepcion-leche-independiente">Lechero</button>
+    
+                </mat-menu>
+            </mat-list-item>-->
+
+            <mat-list-item>
+                <button routerLink="proceso-pasteurizacion" mat-button><mat-icon>settings</mat-icon> Proceso de Pasteurización</button>
+            </mat-list-item>
+            <mat-list-item>
+                <button routerLink="lotes-productos" mat-button><mat-icon>local_shipping</mat-icon> Lotes Productos</button>
+            </mat-list-item>
+            <mat-list-item>
+                <button routerLink="proceso-verificacion" mat-button><mat-icon>business</mat-icon> Proceso Verificación</button>
+            </mat-list-item>
+            <hr>
+            <mat-list-item>
+                <button routerLink="clientes" mat-button><mat-icon>people</mat-icon> Clientes</button>
+            </mat-list-item>
+            <mat-list-item>
+                <button routerLink="pedidos" mat-button><mat-icon>shopping_cart</mat-icon> Pedidos</button>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div style="text-align: center;min-height: 600px;">
+
+            <router-outlet></router-outlet>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>

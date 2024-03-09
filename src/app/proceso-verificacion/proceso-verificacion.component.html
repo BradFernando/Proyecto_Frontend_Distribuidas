@@ -1,0 +1,111 @@
+<mat-card>
+
+    <mat-card-header>
+        <mat-form-field>
+            <input matInput (keyup)="Filterchange($event)" placeholder="Búsqueda Inteligente" />
+        </mat-form-field>
+        <div style="display: flex; align-items: center; margin-left: auto;">
+            <button (click)="addProcesoVerificacion()" mat-raised-button color="primary">Agregar Proceso (+)</button>
+        </div>
+    </mat-card-header>
+
+    <mat-card-content>
+
+        <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!-- Código Proceso Column -->
+            <ng-container matColumnDef="codProcesoVerificacion">
+                <th mat-header-cell *matHeaderCellDef> Código Proceso </th>
+                <td mat-cell *matCellDef="let element"> {{element.codProcesoVerificacion}} </td>
+            </ng-container>
+
+            <!-- Resultado Verificación Column -->
+            <!-- Resultado Verificación Column -->
+            <ng-container matColumnDef="resultadoVerificacion">
+                <th mat-header-cell *matHeaderCellDef> Resultado Verificación </th>
+                <td mat-cell *matCellDef="let element"> {{element.resultadoVerificacion ? 'Correcto' : 'Incorrecto'}}
+                </td>
+            </ng-container>
+
+            <!-- Tiempo Tratamiento Column -->
+            <ng-container matColumnDef="tiempoTratamiento">
+                <th mat-header-cell *matHeaderCellDef> Tiempo Tratamiento </th>
+                <td mat-cell *matCellDef="let element"> {{element.tiempoTratamiento}} </td>
+            </ng-container>
+
+            <!-- Observaciones Column -->
+            <ng-container matColumnDef="observaciones">
+                <th mat-header-cell *matHeaderCellDef> Observaciones </th>
+                <td mat-cell *matCellDef="let element"> {{element.observaciones}} </td>
+            </ng-container>
+
+            <!-- Detalles Proceso Column -->
+            <ng-container matColumnDef="detallesProceso">
+                <th mat-header-cell *matHeaderCellDef> Detalles Proceso </th>
+                <td mat-cell *matCellDef="let element"> {{element.detallesProceso}} </td>
+            </ng-container>
+
+            <!-- Proceso Pasteurización Column -->
+            <!--<ng-container matColumnDef="procesoPasteurizacion">
+                <th mat-header-cell *matHeaderCellDef> Proceso Pasteurización </th>
+                <td mat-cell *matCellDef="let element"> {{element.procesoPasteurizacion}} </td>
+            </ng-container> -->
+
+            <ng-container matColumnDef="procesoPasteurizacion">
+                <th mat-header-cell *matHeaderCellDef> Proceso Pasteurización </th>
+                <td mat-cell *matCellDef="let element">
+                    <!-- Muestra detallesProceso si existe en procesoPasteurizacion -->
+                    <span *ngIf="element.procesoPasteurizacion && element.procesoPasteurizacion.tipoProcesamiento">
+                        {{element.procesoPasteurizacion.tipoProcesamiento}}
+                    </span>
+                </td>
+            </ng-container>
+
+            <!-- Lote Productos Column -->
+            <!--<ng-container matColumnDef="loteProductos">
+                <th mat-header-cell *matHeaderCellDef> Lote Productos </th>
+                <td mat-cell *matCellDef="let element">
+                    <span *ngFor="let lote of element.loteProductos">
+                        {{lote}}
+                    </span>
+                </td>
+            </ng-container>-->
+            <!-- Lote Productos Column -->
+            <ng-container matColumnDef="loteProductos">
+                <th mat-header-cell *matHeaderCellDef> Lote Productos </th>
+                <td mat-cell *matCellDef="let element">
+                    <span *ngFor="let lote of element.loteProductos; let isLast=last">
+                        <!-- Muestra nombreLote si existe en lote -->
+                        <span *ngIf="lote && lote.nombreLote">
+                            {{lote.nombreLote}}{{isLast ? '' : ' - '}}
+                        </span>
+                    </span>
+                </td>
+            </ng-container>
+
+            <!-- Acciones Column -->
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-raised-button color="warn"
+                        (click)="delete(element.codProcesoVerificacion)">Eliminar</button>
+                    <button mat-raised-button color="primary" (click)="edit(element)">Actualizar</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+    </mat-card-content>
+
+    <br>
+    <mat-card-footer>
+
+        <mat-paginator [pageSizeOptions]="[4, 10, 20]" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+        </mat-paginator>
+
+    </mat-card-footer>
+
+</mat-card>

@@ -1,0 +1,70 @@
+<form class="form" [formGroup]="form_RecepcionIndepLechera" (ngSubmit)="save($event)">
+  <h1 mat-dialog-title>{{inputdata.title}}</h1>
+  <div mat-dialog-content>
+
+    <!-- Codigo  -->
+    <mat-form-field class="example-form-field">
+      <mat-label>Código Recepción</mat-label>
+      <input matInput type="text" formControlName="codRecepcion" readonly>
+    </mat-form-field>
+
+    <mat-form-field class="example-form-field">
+      <mat-label> Fecha de Recepción </mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="fechaRecepcion" required>
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="form_RecepcionIndepLechera.get('fechaRecepcion')?.hasError('required')">
+        Este campo es requerido.
+      </mat-error>
+    </mat-form-field>
+    
+    <mat-form-field class="example-form-field">
+      <mat-label>Resultados de Prueba de Calidad</mat-label>
+      <mat-select placeholder="Resultado de prueba calidad" formControlName="resultadosPruebasCalidad" required>
+        <mat-option value="positivo">Positivo</mat-option>
+        <mat-option value="negativo">Negativo</mat-option>
+        <mat-option value="pendiente">Pendiente</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form_RecepcionIndepLechera.get('resultadosPruebasCalidad')?.hasError('required')">
+        Este campo es requerido.
+      </mat-error>
+    </mat-form-field>
+    
+    <mat-form-field class="example-form-field">
+      <mat-label> Cantidad de Leche Recibida </mat-label>
+      <input matInput type="number" placeholder="Cantidad de leche recibida" formControlName="cantidadLecheRecibida" required>
+      <mat-error *ngIf="form_RecepcionIndepLechera.get('cantidadLecheRecibida')?.hasError('required')">
+        Este campo es requerido.
+      </mat-error>
+    </mat-form-field>
+    
+    <mat-form-field class="example-form-field">
+      <mat-label> Pago Total </mat-label>
+      <input matInput type="number" placeholder="Pago Total" formControlName="pagoTotal" required>
+      <mat-error *ngIf="form_RecepcionIndepLechera.get('pagoTotal')?.hasError('required')">
+        Este campo es requerido.
+      </mat-error>
+    </mat-form-field>
+    
+    <mat-form-field class="example-form-field">
+      <mat-label>Lechero Independiente</mat-label>
+      <input matInput [formControl]="searchControl" placeholder="Buscar...">
+      <mat-select formControlName="lecheroIndependiente" multiple required>
+        <mat-option *ngFor="let lechero of filteredlecherosIndependientes | async" [value]="lechero">
+          {{lechero}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form_RecepcionIndepLechera.get('lecheroIndependiente')?.hasError('required')">
+        Este campo es requerido.
+      </mat-error>
+    </mat-form-field>
+
+
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-raised-button type="submit" (click)="submitForm()" color="primary">Enviar</button>
+    <a (click)="closepopup()" mat-raised-button color="warn">Close</a>
+  </div>
+</form>
