@@ -37,29 +37,33 @@
     <button routerLink="input" mat-button>Input</button>
     <button routerLink="autocomplete" mat-button>Autocomplete</button>
 -->
+    <!-- show a user info -->
+    <span *ngIf="user != undefined" style="margin-right: 10px;">
+        <mat-icon>person</mat-icon> {{user?.username}}
+    </span>
 
-    <a href="#" mat-raised-button color="accent">Cerrar Sesión</a>
+    <a mat-raised-button color="accent" (click)="logout()">Logout</a>
     <!-- <button (click)="badgevisibility()"  mat-icon-button>
         <mat-icon matBadgeColor="accent" matBadge="15" [matBadgeHidden]="badgevisible" matBadgeSize="small">notifications</mat-icon>
     </button> -->
 </mat-toolbar>
 <mat-drawer-container autosize>
     <mat-drawer #drawer opened="true" mode="side" position="start">
-        <mat-nav-list>
+        <mat-nav-list *ngIf="user != undefined">
             <mat-list-item>
                 <button routerLink="dashboard-card" mat-button><mat-icon>dashboard</mat-icon> Dashboard</button>
             </mat-list-item>
+
             <mat-list-item>
                 <button routerLink="hacienda-lechera" mat-button><mat-icon>home</mat-icon> Hacienda Lechera</button>
             </mat-list-item>
-            <mat-list-item>
-                <button routerLink="lechero-independiente" mat-button><mat-icon>person_pin</mat-icon> Lechero
-                    Independiente</button>
-            </mat-list-item>
 
             <mat-list-item>
-                <button routerLink="recepcion-leche" mat-button><mat-icon>emoji_nature</mat-icon> Recepción de
-                    Leche</button>
+                <button routerLink="lechero-independiente" mat-button><mat-icon>person_pin</mat-icon> Lechero Independiente</button>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="user?.role == 'ADMIN'">
+                <button routerLink="recepcion-leche" mat-button><mat-icon>emoji_nature</mat-icon> Recepción de Leche</button>
             </mat-list-item>
 
             <!--
@@ -77,19 +81,25 @@
             <mat-list-item>
                 <button routerLink="proceso-pasteurizacion" mat-button><mat-icon>settings</mat-icon> Proceso de Pasteurización</button>
             </mat-list-item>
+
             <mat-list-item>
                 <button routerLink="lotes-productos" mat-button><mat-icon>local_shipping</mat-icon> Lotes Productos</button>
             </mat-list-item>
-            <mat-list-item>
+
+            <mat-list-item *ngIf="user?.role == 'ADMIN'">
                 <button routerLink="proceso-verificacion" mat-button><mat-icon>business</mat-icon> Proceso Verificación</button>
             </mat-list-item>
+
             <hr>
+
             <mat-list-item>
                 <button routerLink="clientes" mat-button><mat-icon>people</mat-icon> Clientes</button>
             </mat-list-item>
+
             <mat-list-item>
                 <button routerLink="pedidos" mat-button><mat-icon>shopping_cart</mat-icon> Pedidos</button>
             </mat-list-item>
+
         </mat-nav-list>
     </mat-drawer>
     <mat-drawer-content>

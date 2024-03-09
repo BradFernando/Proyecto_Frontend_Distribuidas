@@ -37,6 +37,8 @@ yarn-error.log
 testem.log
 /typings
 
+pnpm-lock.yaml
+yarn.lock
 # System files
 .DS_Store
 Thumbs.db
